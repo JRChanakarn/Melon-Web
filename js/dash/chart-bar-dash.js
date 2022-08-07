@@ -1,5 +1,5 @@
-
 import{ p , d }from './db.js';
+
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
@@ -29,6 +29,20 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     return s.join(dec);
 }
 
+
+var max = p+d;
+var j = 0;
+
+do{
+    if(max%100 != 0 ){
+
+        max++;
+    }else{
+        break;
+    }
+
+
+}while(true);
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
 var myBarChart = new Chart(ctx, {
@@ -41,7 +55,7 @@ var myBarChart = new Chart(ctx, {
             backgroundColor: [ '#1cc88a', '#f6c23e'],
             hoverBackgroundColor: ['#17a673','#bc942f'],
             borderColor: "#4e73df",
-            data: [p, d],
+            data: [d, p],
         }],
     },
     options: {
@@ -68,7 +82,7 @@ var myBarChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 100,
+                    max: max,
                     maxTicksLimit: 10,
                     padding: 10,
                 },

@@ -1,4 +1,4 @@
-import{ p , d }from './db-cam1.js';
+import{ p , d }from './db-cam2.js';
 
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';

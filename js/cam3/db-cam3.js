@@ -21,7 +21,7 @@ export const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
 
 export const db = getFirestore();
-export const q = query(collection(db, "Melon"),where("Camera", "==", "cam1"));
+export const q = query(collection(db, "Melon"),where("Camera", "==", "cam3"));
 export const querySnapshot = await getDocs(q);
 export let d = 0;
 export let p = 0;
