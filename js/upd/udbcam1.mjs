@@ -5,11 +5,11 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, query, Timestamp, setDoc, doc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { readFileSync, rename, readdirSync } from "fs";
+import { readFileSync, rename, readdirSync} from "fs";
+import  * as fs from "fs";
+import  * as rd from "FileReader";
 import path from 'path';
 import { fileURLToPath } from 'url';
-
-
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -57,11 +57,14 @@ const docData = {
 };
 
 
+let file = fs.readFileSync('./123.jpg').toString("base64");
 
 
-//getCurrentFilenames();
 
-// Rename the file
+
+console.log(file);
+// getCurrentFilenames();
+
 // rename('123.jpg', mili + '.jpg', (error) => {
 //     if (error) {
 
@@ -78,22 +81,18 @@ const docData = {
 
 //await setDoc(doc(db, "Melon", "cam1-" + mili.toString()), docData);
 
-// Upload file and metadata to the object 'images/mountains.jpg'
-const storageRef = ref(storage, `Melon-img/123.jpg`);
-const uploadTask = uploadBytesResumable(storageRef,`./123.jpg`);
+const storageRef = ref(storage, 'Melon-img/123.jpg');
+
+
+
+const uploadTask = uploadBytesResumable(storageRef, file);
 
 // Listen for state changes, errors, and completion of the upload.
 uploadTask.on('state_changed',
     (snapshot) => {
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log('Upload is ' + progress + '% done');
-        // console.log(snapshot.bytesTransferred);
-        // console.log(snapshot.totalBytes);
-        // console.log(snapshot);
-        // console.log(snapshot.state);
         switch (snapshot.state) {
             case 'paused':
                 console.log('Upload is paused');
@@ -104,7 +103,8 @@ uploadTask.on('state_changed',
         }
     },
     (error) => {
-
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
         switch (error.code) {
             case 'storage/unauthorized':
                 // User doesn't have permission to access the object
@@ -112,6 +112,8 @@ uploadTask.on('state_changed',
             case 'storage/canceled':
                 // User canceled the upload
                 break;
+
+            // ...
 
             case 'storage/unknown':
                 // Unknown error occurred, inspect error.serverResponse
@@ -124,4 +126,5 @@ uploadTask.on('state_changed',
             console.log('File available at', downloadURL);
         });
     }
-); 
+);
+

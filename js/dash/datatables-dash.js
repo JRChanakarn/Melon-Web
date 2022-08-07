@@ -26,6 +26,7 @@ querySnapshot.forEach(function (doc) {
             data.push("<span style = \"  width: 150px ; display: inline-block \">"+ date +"</span>"+time);
             //data.push("<td>"+ date +"</td>"+ time);
             data.push(doc.data().Confidence_value);
+            data.push(doc.data().Camera);
             data.push(url);
             dataSet.push(data);
             w++;
@@ -36,6 +37,7 @@ querySnapshot.forEach(function (doc) {
                     columns: [
                         { title: 'Date',},
                         { title: 'Detection Confidence' },
+                        { title: 'Camera' },
                         {
                             title: 'Detected Image',
                             render: function (data) {
