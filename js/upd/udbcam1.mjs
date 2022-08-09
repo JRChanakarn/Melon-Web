@@ -4,10 +4,10 @@
 
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, query, Timestamp, setDoc, doc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL ,uploadString} from "firebase/storage";
+import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { readFileSync, rename, readdirSync} from "fs";
-import  * as fs from "fs";
-import  * as rd from "FileReader";
+
+
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -28,7 +28,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 const q = query(collection(db, "Melon"));
-const storage = getStorage(app);
+const storage = getStorage();
 
 
 function syncReadFile(filename) {
@@ -56,15 +56,6 @@ const docData = {
     Date: Timestamp.fromDate(new Date()),
 };
 
-
-let file = fs.readFileSync('./123.jpg').toString("base64");
-
-
-
-
-//console.log(file);
-// getCurrentFilenames();
-
 // rename('123.jpg', mili + '.jpg', (error) => {
 //     if (error) {
 
@@ -75,7 +66,6 @@ let file = fs.readFileSync('./123.jpg').toString("base64");
 
 //         console.log("\nFile Renamed\n");
 
-
 //     }
 // });
 
@@ -85,8 +75,27 @@ const storageRef = ref(storage, 'Melon-img/123.jpg');
 
 
 
-console.log(file);
-console.log(storageRef);
-uploadString(storageRef, file, 'base64').then((snapshot) => {
-    console.log('Uploaded a base64 string!');
+import admin from 'firebase-admin';
+var serviceAccount = "./web-melon01-firebase-adminsdk-67r3m-fcae7459c8.json";
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    storageBucket: "web-melon01.appspot.com"
 });
+
+
+
+var bucket = admin.storage().bucket();
+var filename = "./123.jpg"
+
+async function uploadFile() {
+
+    await bucket.upload(filename, {
+        gzip: true,
+    });
+
+    console.log(`${filename} uploaded.`);
+
+}
+
+uploadFile().catch(console.error);

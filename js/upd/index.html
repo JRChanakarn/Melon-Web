@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Firebase Web Basics</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700" rel="stylesheet">
+
+    <script src="https://use.fontawesome.com/939e9dd52c.js"></script>
+    
+</head>
+
+<body>
+
+    <div class="mainDiv" align="right">
+        <h1 align="left">Firebase File Upload</h1>
+        <progress id="uploader" value="0" max="100">0%</progress>
+        <input type="file" id="fileButton" value="upload" />
+    </div>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAhfpKgLgE553HnqUjVgQeTNrGmYaZMShU",
+            authDomain: "web-melon01.firebaseapp.com",
+            projectId: "web-melon01",
+            storageBucket: "web-melon01.appspot.com",
+            messagingSenderId: "437275991929",
+            appId: "1:437275991929:web:7af5b4e5b0f0745a8499a8",
+            measurementId: "G-RPG07G5C8X"
+        };
+
+        firebase.initializeApp(config);
+        //-------------------------------------
+
+        var uploader = document.getElementById('uploader');
+        var fileButton = document.getElementById('fileButton');
+        fileButton.addEventListener('change', function (e) {
+            var file = e.target.files[0];
+            console.log(file);
+            var storageRef = firebase.storage().ref('Melon-img/' + file.name);
+            var task = storageRef.put(file);
+            task.on('state_changed', function progress(snapshot) {
+                var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                uploader.value = percentage;
+
+            }, function error(err) {
+
+
+            }, function complete() {
+
+            });
+        });
+
+    </script>
+
+
+    </script>
+</body>
+
+</html>
