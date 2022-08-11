@@ -5,7 +5,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, query, Timestamp, setDoc, doc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { readFileSync, rename, readdirSync} from "fs";
+import { readFileSync, rename, readdirSync } from "fs";
 
 
 import path from 'path';
@@ -56,26 +56,26 @@ const docData = {
     Date: Timestamp.fromDate(new Date()),
 };
 
-// rename('123.jpg', mili + '.jpg', (error) => {
-//     if (error) {
+rename('123.jpg', mili + '.jpg', (error) => {
+    if (error) {
 
-//         console.log(error);
+        console.log(error);
 
-//     }
-//     else {
+    }
+    else {
 
-//         console.log("\nFile Renamed\n");
+        console.log("\nFile Renamed\n");
 
-//     }
-// });
+    }
+});
 
-//await setDoc(doc(db, "Melon", "cam1-" + mili.toString()), docData);
 
-const storageRef = ref(storage, 'Melon-img/123.jpg');
+
 
 
 
 import admin from 'firebase-admin';
+
 var serviceAccount = "./web-melon01-firebase-adminsdk-67r3m-fcae7459c8.json";
 
 admin.initializeApp({
@@ -86,16 +86,30 @@ admin.initializeApp({
 
 
 var bucket = admin.storage().bucket();
-var filename = "./123.jpg"
+
+var filename = "./"+mili+".jpg";
+const destinationFilename = "Melon-img/"+mili+".jpg";
+
+
+
 
 async function uploadFile() {
 
+    
     await bucket.upload(filename, {
+        
         gzip: true,
+        destination: destinationFilename 
     });
 
     console.log(`${filename} uploaded.`);
 
 }
 
-uploadFile().catch(console.error);
+
+//upload to Storage
+uploadFile();
+
+//uplode to firestroage
+await setDoc(doc(db, "Melon", "cam1-" + mili.toString()), docData);
+console.log(docData);

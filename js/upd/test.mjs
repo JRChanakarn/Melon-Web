@@ -1,34 +1,26 @@
+import { initializeApp } from "firebase/app";
 
-import {Storage} from'@google-cloud/storage';
-import express from "express";
-import {app} from "./index.mjs";
-// const app2 = new express();
+import { getStorage, ref, uploadString, getDownloadURL } from "firebase/storage";
+import { readFileSync, rename, readdirSync } from "fs";
+const firebaseConfig = {
+    apiKey: "AIzaSyAhfpKgLgE553HnqUjVgQeTNrGmYaZMShU",
+    authDomain: "web-melon01.firebaseapp.com",
+    projectId: "web-melon01",
+    storageBucket: "web-melon01.appspot.com",
+    messagingSenderId: "437275991929",
+    appId: "1:437275991929:web:7af5b4e5b0f0745a8499a8",
+    measurementId: "G-RPG07G5C8X"
+};
+
+const app = initializeApp(firebaseConfig);
 
 
-const storage = new Storage("AIzaSyAhfpKgLgE553HnqUjVgQeTNrGmYaZMShU");
+const storage = getStorage(app)
 
-let bucketName = "web-melon01.appspot.com";
+const file = readFileSync('./123.jpg').toString('base64');
 
-let filename = '123.jpg';
+// Upload file and metadata to the object 'images/mountains.jpg'
 
-// Testing out upload of file
-const uploadFile = async() => {
+const storageRef = ref(storage, 'Melon-img/123.jpg');
+const uploadTask = uploadString(storageRef,file);
 
-    // Uploads a local file to the bucket
-    await storage.bucket(bucketName).upload(filename, {
-        // Support for HTTP requests made with `Accept-Encoding: gzip`
-        gzip: true,
-        // By setting the option `destination`, you can change the name of the
-        // object you are uploading to a bucket.
-        metadata: {
-            // Enable long-lived HTTP caching headers
-            // Use only if the contents of the file will never change
-            // (If the contents will change, use cacheControl: 'no-cache')
-            cacheControl: 'public, max-age=31536000',
-        },
-});
-
-console.log(`${filename} uploaded to ${bucketName}.`);
-}
-
-uploadFile();
