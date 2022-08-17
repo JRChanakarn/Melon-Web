@@ -6,6 +6,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -35,19 +36,10 @@ function syncReadFile(filename) {
 
 }
 
-
 const scriptName = __filename.split(/[\\/]/).pop(); // Remove the last array element
 //console.log(scriptName);
 let i = 1;
-const Confi = syncReadFile('../text/Confidence_value.txt');
 const mili = +new Date();
-
-const docData = {
-    Camera: 1,
-    Confidence_value: Confi.toString(),
-    Date: Timestamp.fromDate(new Date()),
-};
-
 
 function getCurrentFilenames() {
     readdirSync(__dirname).forEach(file => {
@@ -78,45 +70,20 @@ function getCurrentFilenames() {
 
 }
 
+const Confi = syncReadFile('./Confidence_value.txt');
+
+
+const docData = {
+    Camera: "cam1",
+    Confidence_value: Confi.toString(),
+    Date: Timestamp.fromMillis(mili),
+};
 
 
 
-import admin from 'firebase-admin';
-
-var serviceAccount = "./web-melon01-firebase-adminsdk-67r3m-fcae7459c8.json";
-
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    storageBucket: "web-melon01.appspot.com"
-});
-
-
-
-var bucket = admin.storage().bucket();
-
-var filename = "./"+mili+".jpg";
-const destinationFilename = "Melon-img/cam0-"+mili+".jpg";
-
-
-
-
-async function uploadFile() {
-
-    
-    await bucket.upload(filename, {
-        
-        gzip: true,
-        destination: destinationFilename 
-    });
-
-    console.log(`${filename} uploaded.`);
-
-}
 
 getCurrentFilenames();
-//upload to Storage
-//uploadFile();
 
-//uplode to firestroage
-//await setDoc(doc(db, "Melon", "cam0-" + mili.toString()), docData);
-console.log(docData);
+
+
+//await setDoc(doc(db, "Melon", "cam1-" + mili.toString()), docData);

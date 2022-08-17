@@ -102,7 +102,7 @@ querySnapshot.forEach(function (doc) {
                                     }else if(c[i] == 'Powdery'){
                                         z.push('<div>'+c[i]+' Midew </div><div class="animated-progress progress-yellow"><span data-progress="'+ e[i] + '"></span></div>');
                                     }else{
-                                        z.push('-')
+                                        z.push('None')
                                     }
                                     
                                 
