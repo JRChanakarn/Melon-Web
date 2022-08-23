@@ -52,8 +52,10 @@ var myBarChart = new Chart(ctx, {
         datasets: [{
             maxBarThickness: 100,
             label: "Detect",
-            backgroundColor: [ '#1cc88a', '#f6c23e'],
-            hoverBackgroundColor: ['#17a673','#bc942f'],
+            //backgroundColor: [ '#1cc88a', '#f6c23e'],
+            backgroundColor: [ '#8d5524', '#ffa54f'],
+            hoverBackgroundColor: ['#693f1b','#cf8640'],
+           // hoverBackgroundColor: ['#17a673','#bc942f'],
             borderColor: "#4e73df",
             data: [d, p],
         }],

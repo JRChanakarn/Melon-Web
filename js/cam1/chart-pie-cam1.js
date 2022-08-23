@@ -11,8 +11,10 @@ var myPieChart = new Chart(ctx, {
         labels: ["Downy mildew", "Powdary mildew"],
         datasets: [{
             data: [p, d],
-            backgroundColor: ['#f6c23e', '#1cc88a'],
-            hoverBackgroundColor: ['#bc942f', '#17a673'],
+            // backgroundColor: ['#f6c23e', '#1cc88a'],
+            // hoverBackgroundColor: ['#bc942f', '#17a673'],
+            backgroundColor: ['#ffa54f', '#8d5524', ],
+            hoverBackgroundColor: ['#cf8640','#693f1b',],
             hoverBorderColor: "rgba(234, 236, 244, 1)",
         }],
     },
