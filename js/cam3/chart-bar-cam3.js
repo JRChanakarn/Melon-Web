@@ -48,7 +48,7 @@ var ctx = document.getElementById("myBarChart");
 var myBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Downy Midew", "Powdary Midew"],
+        labels: ["Downy Midew", "Powdery Midew"],
         datasets: [{
             maxBarThickness: 100,
             label: "Detect",
