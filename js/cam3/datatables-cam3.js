@@ -132,26 +132,13 @@ querySnapshot.forEach(function (doc) {
                                         }
                                     }
                                 }
-                                // console.log(e.sort((a, b) => b-a));
-                                $(".animated-progress span").each(function () {
-                                    $(this).animate(
-                                        {
-                                            width: $(this).attr("data-progress") + "%",
-                                        },
-                                        1000
-                                    );
-                                    $(this).text($(this).attr("data-progress") + "%");
-                                });
 
                                 const z = [];
                                 for (let i = 0; i < c.length; i++) {
                                     if (csort2[i] == 'Downy') {
-                                        //z.push('<div>'+c[i]+' Midew </div><div class="animated-progress progress-green"><span data-progress="'+ e[i] + '"></span></div>');
-                                        z.push('<h4 class="progress-label"> ' + csort2[i] + ' Mildew&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4><div class="animated-progress progress-downy"><span data-progress="' + esort[i] + '"></span></div><br>');
-                                        //z.push('<progress style="Color = red" value="'+e[i]+'" max="100"> '+e[i]+'% </progress><label>'+e[i]+'% '+c[i]+' Mildew</label><br>');
+                                        z.push('<div class="meter"><span style="width:'+esort[i]+'%;"><span class="progress-dow"></span></span><span style="display=inline">test</span></div><span class="progress-label">'+ esort[i]+"% "+ csort2[i] +" Mildew"+'</span><br><br>');
                                     } else if (csort2[i] == 'Powdery') {
-                                        //  z.push('<div>'+c[i]+' Midew </div><div class="animated-progress progress-yellow"><span data-progress="'+ e[i] + '"></span></div>');
-                                        z.push('<h4 class="progress-label"> ' + csort2[i] + ' Mildew&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4><div class="animated-progress progress-yellow"><span data-progress="' + esort[i] + '"></span></div><br>');
+                                        z.push('<div class="meter"><span style="width:'+esort[i]+'%;"><span class="progress-pow"></span></span><span style="display=inline">test</span></div><span class="progress-label">'+ esort[i]+"% "+ csort2[i] +" Mildew"+'</span><br><br>');
                                     } else {
                                         z.push('None')
                                     }
@@ -165,7 +152,6 @@ querySnapshot.forEach(function (doc) {
                                 return '<img src=" ' + data + ' " class="center" width="200" height="200" >'
                             }
                         }
-
                     ]
                 });
             }
