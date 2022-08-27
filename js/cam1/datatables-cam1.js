@@ -13,13 +13,14 @@ let w = 0;
 
 querySnapshot.forEach(function (doc) {
 
+    const id=[];
+    id.push(doc.id.toString().split("-"));
+    id[0].splice(0, 1);
     const timestamp = doc.data().Date;
     const date2 = timestamp.toDate();
     const date = dateFormat(date2, " mmm dd, yyyy (ddd)");
     const time = dateFormat(date2, " hh:MM:ss TT");
-    //const time = timestamp.toDate().toLocaleTimeString('th-TH');
-    millis = timestamp.toMillis();
-    const wlistRef = ref(storage, 'Melon-img/' + millis + '.jpg');
+    const wlistRef = ref(storage, 'Melon-img/' + id.toString() + '.jpg');
     const data = [];
     i++;
     getDownloadURL(wlistRef)
@@ -159,3 +160,6 @@ querySnapshot.forEach(function (doc) {
         });
 
 });
+
+
+
