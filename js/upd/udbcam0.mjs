@@ -95,7 +95,7 @@ admin.initializeApp({
 var bucket = admin.storage().bucket();
 
 var filename = "./"+mili+".jpg";
-const destinationFilename = "Melon-img/cam0-"+mili+".jpg";
+const destinationFilename = "Melon-img/ç"+mili+".jpg";
 
 
 
