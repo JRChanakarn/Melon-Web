@@ -6,15 +6,11 @@ import dateFormat from "../dateformat.js";
 const dataSet = [];
 const storage = getStorage();
 
+let millis;
 let i = 0;
 let w = 0;
 
 
-querySnapshot.forEach(function (doc) {
-
-    w++;
-
-});
 querySnapshot.forEach(function (doc) {
 
     const id=[];
@@ -24,7 +20,7 @@ querySnapshot.forEach(function (doc) {
     const date2 = timestamp.toDate();
     const date = dateFormat(date2, " mmm dd, yyyy (ddd)");
     const time = dateFormat(date2, " hh:MM:ss TT");
-   // const wlistRef = ref(storage,  'Melon-img/'+id.toString() + '.jpg');
+    const wlistRef = ref(storage, 'Melon-img/' + id.toString() + '.jpg');
     const data = [];
     i++;
 
@@ -58,9 +54,10 @@ querySnapshot.forEach(function (doc) {
             data.push(c.length);
             data.push(doc.data().Confidence_value);
             data.push(doc.data().URL);
+            
             dataSet.push(data);
-            console.log(w);
-        
+            console.log(dataSet);
+            w++;
             if (w == i) {
                 $('#dataTable').DataTable({
                     data: dataSet,
