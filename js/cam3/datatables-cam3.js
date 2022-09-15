@@ -59,9 +59,11 @@ querySnapshot.forEach(function (doc) {
             data.push(doc.data().Confidence_value);
             data.push(doc.data().URL);
             dataSet.push(data);
-            console.log(w);
-        
+            
+
+            console.log(dataSet);
             if (w == i) {
+
                 $('#dataTable').DataTable({
                     data: dataSet,
                     columns: [
