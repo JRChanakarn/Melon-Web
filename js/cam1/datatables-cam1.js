@@ -158,7 +158,7 @@ querySnapshot.forEach(function (doc) {
                             }
                         }
 
-                    ]
+                    ],order: [[0, 'desc']],
                 });
             }
 

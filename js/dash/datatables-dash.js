@@ -58,18 +58,11 @@ querySnapshot.forEach(function (doc) {
     data.push(doc.data().Confidence_value);
     data.push(doc.data().URL);
     dataSet.push(data);
-    co--nsole.log("update");
 
     if (w == i) {
         $('#dataTable').DataTable({
             data: dataSet,
             columns: [
-                {
-                    className: 'dt-control',
-                    orderable: false,
-                    data: null,
-                    defaultContent: '',
-                },
                 { title: 'Date', "width": "20%" },
                 { title: 'Camera', "width": "15%" },
                 {
@@ -115,19 +108,19 @@ querySnapshot.forEach(function (doc) {
                         const cs2 = cs.toString().split(",");
                         const temp = [];
                         for (let i = 0; i < cs2.length; i++) {
-                            if (cs2[i] < cs2[i + 2]) {
-                                temp[0] = c[i];
-                                c[i] = c[i + 1];
-                                c[i + 1] = temp[0];
-                                // console.log(test2[i]+">"+test2[i+2]);
-                            }
+                                if (cs2[i] < cs2[i + 2]) {
+                                    temp[0] = c[i];
+                                    c[i] = c[i + 1];
+                                    c[i + 1] = temp[0];
+                                    // console.log(test2[i]+">"+test2[i+2]);
+                                }
                         }
 
                         for (let i = 0; i < c.length; i++) {
-                            if (c[i] === undefined) {
-                                c.splice(i, 1);
-                                i--;
-                            }
+                        if (c[i] === undefined) {
+                            c.splice(i, 1);
+                            i--;
+                        }
                         }
 
                         const csort = c.toString().split(" ");
@@ -146,9 +139,9 @@ querySnapshot.forEach(function (doc) {
                         const z = [];
                         for (let i = 0; i < c.length; i++) {
                             if (csort2[i] == 'Downy') {
-                                z.push('<div class="meter"><span style="width:' + esort[i] + '%;"><span class="progress-dow"></span></span><span style="display=inline">test</span></div><span class="progress-label">' + esort[i] + "% " + csort2[i] + " Mildew" + '</span><br><br>');
+                                z.push('<div class="meter"><span style="width:'+esort[i]+'%;"><span class="progress-dow"></span></span><span style="display=inline">test</span></div><span class="progress-label">'+ esort[i]+"% "+ csort2[i] +" Mildew"+'</span><br><br>');
                             } else if (csort2[i] == 'Powdery') {
-                                z.push('<div class="meter"><span style="width:' + esort[i] + '%;"><span class="progress-pow"></span></span><span style="display=inline">test</span></div><span class="progress-label">' + esort[i] + "% " + csort2[i] + " Mildew" + '</span><br><br>');
+                                z.push('<div class="meter"><span style="width:'+esort[i]+'%;"><span class="progress-pow"></span></span><span style="display=inline">test</span></div><span class="progress-label">'+ esort[i]+"% "+ csort2[i] +" Mildew"+'</span><br><br>');
                             } else {
                                 z.push('None')
                             }
@@ -163,8 +156,7 @@ querySnapshot.forEach(function (doc) {
                     }
                 }
 
-            ]
-            
+            ],order: [[0, 'desc']],
         });
     }
 
