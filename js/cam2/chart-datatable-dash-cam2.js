@@ -1,7 +1,107 @@
-import { querySnapshot } from "./db-cam1.js";
-import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-storage.js";
-
+import { p, d } from './db-cam2.js';
+import { querySnapshot } from "./db-cam2.js";
+import { getStorage } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-storage.js";
 import dateFormat from "../dateformat.js";
+
+Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+Chart.defaults.global.defaultFontColor = '#858796';
+
+
+var xValues = ["Powdary mildew", "Downy mildew"];
+var barColors = [
+    '#ffa54f', '#8d5524'
+];
+
+new Chart("myPieChart", {
+    type: "doughnut",
+    data: {
+        labels: xValues,
+        datasets: [{
+            backgroundColor: barColors,
+            data: [p, d]
+        }]
+    },
+    options: {
+        maintainAspectRatio: false,
+        tooltips: {
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: false,
+            caretPadding: 10,
+        },
+        legend: {
+            display: false
+        },
+        cutoutPercentage: 80,
+    },
+});
+
+
+new Chart("myBarChart", {
+    type: "bar",
+    data: {
+        labels: xValues,
+        datasets: [{
+            backgroundColor: barColors,
+            data: [p, d],
+
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                gridLines: {
+                    color: "rgb(234, 236, 244)",
+                    zeroLineColor: "rgb(234, 236, 244)",
+                    drawBorder: false,
+                    borderDash: [2],
+                    zeroLineBorderDash: [2]
+                },
+                ticks: {
+                    beginAtZero: true
+                }
+            }],
+            xAxes: [{
+                gridLines: {
+                    display: false,
+                    drawBorder: false
+                },
+                barPercentage: 0.3
+            }]
+        },
+        maintainAspectRatio: false,
+
+        tooltips: {
+            titleMarginBottom: 10,
+            titleFontColor: '#6e707e',
+            titleFontSize: 14,
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: true,
+            caretPadding: 10,
+        },
+
+        legend: {
+            display: false
+        }
+
+    },
+});
+
+
+
+
+
+
+
 
 const dataSet = [];
 const storage = getStorage();
@@ -11,7 +111,6 @@ let w = 0;
 
 
 querySnapshot.forEach(function (doc) {
-
     w++;
 
 });
@@ -59,11 +158,12 @@ querySnapshot.forEach(function (doc) {
     data.push(doc.data().Confidence_value);
     data.push(doc.data().URL);
     dataSet.push(data);
-    console.log(w);
 
     if (w == i) {
         $('#dataTable').DataTable({
             data: dataSet,
+            "columnDefs": [{ "type": "numeric-comma", targets: 0 }],
+            order: [[0, "desc"]],
             columns: [
                 { title: 'Date', "width": "20%" },
                 { title: 'Camera', "width": "15%" },
@@ -138,6 +238,9 @@ querySnapshot.forEach(function (doc) {
                             }
                         }
 
+                        // console.log("E = " + esort);
+
+                        // console.log("C = " + csort2);
                         const z = [];
                         for (let i = 0; i < c.length; i++) {
                             if (csort2[i] == 'Downy') {
@@ -158,7 +261,7 @@ querySnapshot.forEach(function (doc) {
                     }
                 }
 
-            ], order: [[0, 'desc']],
+            ],
         });
     }
 
