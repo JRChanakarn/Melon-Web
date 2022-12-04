@@ -5784,17 +5784,18 @@ a.badge-dark.focus {
     height: 100%;
 }
 
-.progress-dow{
+.progress-dow {
     background-color: #8d5524;
     animation: progressBar 1.5s ease-in-out;
     animation-fill-mode: both;
 }
 
-.progress-pow{
+.progress-pow {
     background-color: #F89235;
     animation: progressBar 1.5s ease-in-out;
     animation-fill-mode: both;
 }
+
 @keyframes progressBar {
     0% {
         width: 0;
@@ -12718,3 +12719,26 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
     width: 100%;
 }
+
+.dataTables_wrapper {
+
+    width: 1099px;
+    min-width: 1099px;
+}
+
+.page-item.active .page-link {
+
+    background-color: #8d5524;
+    border-color: #8d5524;
+}
+
+.page-link{
+
+    color: #858796;
+}
+
+.page-link:hover{
+
+    color: #858796;
+}
+
