@@ -12721,8 +12721,6 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 .dataTables_wrapper {
-
-    width: 1099px;
     min-width: 1099px;
 }
 
@@ -12732,13 +12730,19 @@ body.sidebar-toggled footer.sticky-footer {
     border-color: #8d5524;
 }
 
-.page-link{
+.page-link {
 
     color: #858796;
 }
 
-.page-link:hover{
+.page-link:hover {
 
     color: #858796;
 }
 
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 0rem;
+    margin-left: 0rem;
+}
