@@ -20,9 +20,9 @@ const firebaseConfig = {
 };
 
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore();
-const q = query(collection(db, "Melon"));
+const app = initializeApp(firebaseConfig);  //เชื่อมต่อกับ Firebase Project
+const db = getFirestore();  //เชื่อมต่อกับ Firestore database
+const q = query(collection(db, "Melon")); //Query Collection Melon
 
 
 
